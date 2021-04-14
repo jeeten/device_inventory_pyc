@@ -22,7 +22,7 @@ services:
       - 3306
     environment:
       - MYSQL_ROOT_PASSWORD=root@123
-      - MYSQL_DATABASE=device
+      - MYSQL_DATABASE=inventory
 
     volumes:
       - ./data/mysql/db:/var/lib/mysql
