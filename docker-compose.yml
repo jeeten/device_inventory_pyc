@@ -25,4 +25,5 @@ services:
       - MYSQL_DATABASE=device
 
     volumes:
-      - ./DB/init:/docker-entrypoint-initdb.d/:ro
+      - ./data/mysql/db:/var/lib/mysql
+      - ./data/mysql/init:/docker-entrypoint-initdb.d/:ro
