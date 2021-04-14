@@ -1,7 +1,25 @@
 version: '3.8'
 services:
+  db:
+    image: mariadb
+    restart: always
+    container_name: maridadb
+    ports:
+      - 3306:3306
+      expose:
+        - 3306
+    environment:
+      - MYSQL_ROOT_PASSWORD: root@123
+      - MYSQL_DATABASE: device
+
+    volumes:
+      - ./DB/mariadb/data:/var/lib/mysql:rw
+      - ./DB/init:/docker-entrypoint-initdb.d
   web:
     build: .
     command: python manage.pyc runserver 0.0.0.0:8000
     ports:
       - 8000:8000
+  volumes:
+    db-data:
+      external: true
