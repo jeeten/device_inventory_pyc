@@ -1,6 +1,6 @@
 /*
 SQLyog Community v13.1.5  (64 bit)
-MySQL - 8.0.17 : Database - device
+MySQL - 10.4.13-MariaDB-log : Database - pofgc6u59kclfyyt
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 8.0.17 : Database - device
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`device` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`pofgc6u59kclfyyt` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 
-USE `device`;
+USE `pofgc6u59kclfyyt`;
 
 /*Table structure for table `auth_group` */
 
@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `auth_group`;
 
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -78,9 +78,9 @@ DROP TABLE IF EXISTS `auth_permission`;
 
 CREATE TABLE `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content_type_id` int(11) NOT NULL,
-  `codename` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codename` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
@@ -132,13 +132,13 @@ DROP TABLE IF EXISTS `auth_user`;
 
 CREATE TABLE `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_login` datetime(6) DEFAULT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `first_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(254) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(254) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL,
@@ -198,16 +198,16 @@ DROP TABLE IF EXISTS `device_device`;
 CREATE TABLE `device_device` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `imei` bigint(20) NOT NULL,
-  `wfi_mac` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `iccid` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `imsi` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mdn` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `assignee` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `assigned_date` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `purpose` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `return_date` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `comment` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `delivery` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wfi_mac` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `iccid` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `imsi` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mdn` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `assignee` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `assigned_date` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purpose` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `return_date` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comment` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delivery` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
   `model_id` int(11) NOT NULL,
   `oem_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -216,9 +216,102 @@ CREATE TABLE `device_device` (
   KEY `device_device_oem_id_a7b5d230_fk_device_oem_id` (`oem_id`),
   CONSTRAINT `device_device_model_id_b2726a54_fk_device_model_id` FOREIGN KEY (`model_id`) REFERENCES `device_model` (`id`),
   CONSTRAINT `device_device_oem_id_a7b5d230_fk_device_oem_id` FOREIGN KEY (`oem_id`) REFERENCES `device_oem` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1522 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `device_device` */
+
+insert  into `device_device`(`id`,`imei`,`wfi_mac`,`iccid`,`imsi`,`mdn`,`assignee`,`assigned_date`,`purpose`,`return_date`,`comment`,`delivery`,`model_id`,`oem_id`) values 
+(1422,352774390104515,'7846D43FC665','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1423,352774390104549,'7846D43FC66B','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1424,352774390104564,'7846D43FC66F','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1425,352774390104606,'7846D43FC677','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1426,352774390104614,'7846D43FC679','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1427,352774390104655,'7846D43FC681','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1428,352774390104697,'7846D43FC689','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1429,352774390104705,'7846D43FC68B','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1430,352774390104713,'7846D43FC68D','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1431,352774390104796,'7846D43FC69D','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1432,352774390104804,'7846D43FC69F','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1433,352774390105199,'7846D43FC6ED','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1434,352774390105207,'7846D43FC6EF','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1435,352774390105637,'7846D43FC745','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1436,352774390105694,'7846D43FC751','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1437,352774390105702,'7846D43FC753','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1438,352774390105710,'7846D43FC755','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1439,352774390105728,'7846D43FC757','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1440,352774390105736,'7846D43FC759','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1441,352774390105744,'7846D43FC75B','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1442,352774390105801,'7846D43FC767','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1443,352774390105827,'7846D43FC76B','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1444,352774390105835,'7846D43FC76D','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1445,352774390105843,'7846D43FC76F','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1446,352774390105884,'7846D43FC777','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1447,352774390105900,'7846D43FC77B','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1448,352774390105934,'7846D43FC781','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1449,352774390105942,'7846D43FC783','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1450,352774390105959,'7846D43FC785','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1451,352774390105975,'7846D43FC789','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1452,352774390106007,'7846D43FC78F','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1453,352774390106015,'7846D43FC791','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1454,352774390106023,'7846D43FC793','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1455,352774390106031,'7846D43FC795','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1456,352774390106049,'7846D43FC797','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1457,352774390106056,'7846D43FC799','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1458,352774390106064,'7846D43FC79B','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1459,352774390106072,'7846D43FC79D','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1460,352774390106080,'7846D43FC79F','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1461,352774390106114,'7846D43FC7A5','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1462,352774390106122,'7846D43FC7A7','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1463,352774390106130,'7846D43FC7A9','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1464,352774390106163,'7846D43FC7AF','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1465,352774390106189,'7846D43FC7B3','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1466,352774390106197,'7846D43FC7B5','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1467,352774390106205,'7846D43FC7B7','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1468,352774390106213,'7846D43FC7B9','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1469,352774390106221,'7846D43FC7BB','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1470,352774390106239,'7846D43FC7BD','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1471,352774390106254,'7846D43FC7C1','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1472,352774390106262,'7846D43FC7C3','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1473,352774390106270,'7846D43FC7C5','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1474,352774390106288,'7846D43FC7C7','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1475,352774390106296,'7846D43FC7C9','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1476,352774390106304,'7846D43FC7CB','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1477,352774390106312,'7846D43FC7CD','',NULL,'',NULL,'04/09/2021','','','','Pre-LE',894,565),
+(1478,352774390107385,'7846D43FC8A3','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1479,352774390107336,'7846D43FC899','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1480,352774390107328,'7846D43FC897','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1481,352774390107310,'7846D43FC895','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1482,352774390107302,'7846D43FC893','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1483,352774390107286,'7846D43FC88F','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1484,352774390107278,'7846D43FC88D','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1485,352774390107260,'7846D43FC88B','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1486,352774390107252,'7846D43FC889','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1487,352774390107245,'7846D43FC887','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1488,352774390107237,'7846D43FC885','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1489,352774390107229,'7846D43FC883','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1490,352774390107211,'7846D43FC881','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1491,352774390107203,'7846D43FC87F','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1492,352774390107195,'7846D43FC87D','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1493,352774390107153,'7846D43FC875','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1494,352774390107120,'7846D43FC86F','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1495,352774390107112,'7846D43FC86D','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1496,352774390107104,'7846D43FC86B','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1497,352774390107096,'7846D43FC869','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1498,352774390107088,'7846D43FC867','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1499,352774390107070,'7846D43FC865','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1500,352774390107062,'7846D43FC863','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1501,352774390107054,'7846D43FC861','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1502,352774390107047,'7846D43FC85F','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1503,352774390107021,'7846D43FC85B','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1504,352774390107013,'7846D43FC859','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1505,352774390106932,'7846D43FC849','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1506,352774390106890,'7846D43FC841','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1507,352774390106882,'7846D43FC83F','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1508,352774390106874,'7846D43FC83D','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1509,352774390106833,'7846D43FC835','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1510,352774390106825,'7846D43FC833','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1511,352774390106817,'7846D43FC831','',NULL,'',NULL,'04/09/2021','','','','LE',894,565),
+(1512,352774390106809,'7846D43FC82F','',NULL,'',NULL,'04/09/2021','','','','LE',894,565);
 
 /*Table structure for table `device_model` */
 
@@ -226,7 +319,7 @@ DROP TABLE IF EXISTS `device_model`;
 
 CREATE TABLE `device_model` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `oem_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `device_model_oem_id_name_44a4be06_uniq` (`oem_id`,`name`),
@@ -246,7 +339,7 @@ DROP TABLE IF EXISTS `device_oem`;
 
 CREATE TABLE `device_oem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=571 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -264,18 +357,17 @@ DROP TABLE IF EXISTS `django_admin_log`;
 CREATE TABLE `django_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
-  `object_id` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `object_repr` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `action_flag` smallint(5) unsigned NOT NULL,
-  `change_message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `object_id` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `object_repr` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL CHECK (`action_flag` >= 0),
+  `change_message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
-  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
-  CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1425 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `django_admin_log` */
@@ -1712,8 +1804,8 @@ DROP TABLE IF EXISTS `django_content_type`;
 
 CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `app_label` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1737,8 +1829,8 @@ DROP TABLE IF EXISTS `django_migrations`;
 
 CREATE TABLE `django_migrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `app` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `app` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1773,8 +1865,8 @@ insert  into `django_migrations`(`id`,`app`,`name`,`applied`) values
 DROP TABLE IF EXISTS `django_session`;
 
 CREATE TABLE `django_session` (
-  `session_key` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `session_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `session_key` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `session_data` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
